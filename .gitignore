@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.idea
+
+# captured data 
+results/
+ID2T_synth_attack/
+
+# VSCode settings 
+.vscode
+
+# IPython Notebook
+.ipynb_checkpoints
+
+# pickle files
+*.pkl
+models/
+
+# temporary files
+build/
+
+# cythonizing 
+*.c
+
+# profiling reports
+*.prof
+*.dat

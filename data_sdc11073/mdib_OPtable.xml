@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<msg:GetMdibResponse
+	xmlns:ext="http://standards.ieee.org/downloads/11073/11073-10207-2017/extension"
+	xmlns:fn="http://www.w3.org/2005/xpath-functions"
+	xmlns:fo="http://www.w3.org/1999/XSL/Format"
+	xmlns:m="http://www.draeger.com/CTEM"
+	xmlns:msg="http://standards.ieee.org/downloads/11073/11073-10207-2017/message"
+	xmlns:pm="http://standards.ieee.org/downloads/11073/11073-10207-2017/participant"
+	xmlns:ps="http://schemas.microsoft.com/powershell/2004/04"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://standards.ieee.org/downloads/11073/11073-10207-2017/participant BICEPS_ParticipantModel.xsd
+        		 https://standards.ieee.org/downloads/11073/11073-10207-2017/message BICEPS_MessageModel.xsd
+        		 https://standards.ieee.org/downloads/11073/11073-10207-2017/extension ExtensionPoint.xsd"
+	SequenceId="urn:oid:1">
+
+	<msg:Mdib SequenceId="urn:oid:1">
+		<pm:MdDescription>
+
+            <!-- medical device system (root, level1) -->
+			<!-- here: operating table -->
+			<pm:Mds Handle="mds0" SafetyClassification="MedA">
+				<pm:Type Code="70029"> <!-- MDC_DEV_SYS_MULTI_MODEL_MDS 1::4493 -->
+						<pm:ConceptDescription Lang="en-US">Operating Table</pm:ConceptDescription>
+				</pm:Type>
+
+				<!-- System Contexts (level2) -->
+				<pm:SystemContext Handle="SC.mds0">
+					<pm:PatientContext Handle="PC.mds0" />
+					<pm:LocationContext Handle="LC.mds0" />
+				</pm:SystemContext> 
+
+                <!-- virtual medical device (level2) -->
+				<!-- here: column -->
+				<pm:Vmd Handle="vmd0" SafetyClassification="MedA">
+					<pm:Type Code="70718"> <!-- MDC_DEV_CNTRL_VMD 1::5182 -->
+						<pm:ConceptDescription Lang="en-US">Column of the Operating Table</pm:ConceptDescription>
+					</pm:Type>
+
+                    <!-- Alert System could be specified at this point (level3) -->   
+ 
+
+                    <!-- Service and Control Object (level3) -->                 
+					<pm:Sco Handle="sco.vmd0">
+						<pm:Operation Handle="mds0_sco"
+							xsi:type="pm:ActivateOperationDescriptor"
+							SafetyClassification="MedC" OperationTarget="mds0"
+							MaxTimeToFinish="PT1S" AccessLevel="Usr">
+							<pm:Type Code="134109"> <!-- MDC_ACT_ACC_SETTINGS 2::3037 -->
+								<pm:ConceptDescription Lang="en-US">operation to activate the operating table</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m0.ch0.vmd0_sco"
+							OperationTarget="m0.ch0.vmd0" SafetyClassification="MedC"
+							MaxTimeToFinish="PT5S" InvocationEffectiveTimeout="PT1S" Retriggerable="true" AccessLevel="Usr">
+							<pm:Type Code="134159"> <!-- MDC_ACT_SET_MDS_STATE 2::3087 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific lift-position</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m1.ch0.vmd0_sco"
+							OperationTarget="m1.ch0.vmd0" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="Usr">
+							<pm:Type Code="134156"> <!-- MDC_ACT_SEG_CLR 2::3084 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific lift-speed</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m0.ch1.vmd0_sco"
+							OperationTarget="m0.ch1.vmd0" SafetyClassification="MedC"
+							MaxTimeToFinish="PT5S" InvocationEffectiveTimeout="PT1S" Retriggerable="true" AccessLevel="Usr">
+							<pm:Type Code="134155"> <!-- MDC_ACT_SCO_OP_INVOK 2::3083 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific tilt-position</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m1.ch1.vmd0_sco"
+							OperationTarget="m1.ch1.vmd0" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="Usr">
+							<pm:Type Code="134153"> <!-- MDC_ACT_REFR_OP_ATTR 2::3081 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific tilt-speed</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m0.ch2.vmd0_sco"
+							OperationTarget="m0.ch2.vmd0" SafetyClassification="MedC"
+							MaxTimeToFinish="PT5S" InvocationEffectiveTimeout="PT1S" Retriggerable="true" AccessLevel="Usr">
+							<pm:Type Code="134160"> <!-- MDC_ACT_UPLD_TEXT_CTLG 2::3088 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific slant-position</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m1.ch2.vmd0_sco"
+							OperationTarget="m1.ch2.vmd0" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="Usr">
+							<pm:Type Code="134146"> <!--MDC_ACT_ADMIT_PT 2::3074 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific slant-speed</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetStringOperationDescriptor"
+							Handle="m0.ch3.vmd0_sco"
+							OperationTarget="m0.ch3.vmd0" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="CSUsr">
+							<pm:Type Code="134154"> <!-- MDC_ACT_REFR_OP_CTXT 2::3082 -->
+								<pm:ConceptDescription Lang="en-US">operation to configure the column type</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetStringOperationDescriptor"
+							Handle="m1.ch3.vmd0_sco"
+							OperationTarget="m1.ch3.vmd0" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="CSUsr">
+							<pm:Type Code="134147"> <!-- MDC_ACT_CLR_LOG 2::3075 -->
+								<pm:ConceptDescription Lang="en-US">operation to install/deinstall a transporter</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetStringOperationDescriptor"
+							Handle="m2.ch3.vmd0_sco"
+							OperationTarget="m2.ch3.vmd0" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="Usr">
+							<pm:Type Code="134148"> <!-- MDC_ACT_DISCH_PT 2::3076 -->
+								<pm:ConceptDescription Lang="en-US">operation to lock/unlock the column</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+					</pm:Sco> 
+
+                    <!-- Channel0 (level3) -->  
+					<!-- here: lift (Hub)-->                                      
+					<pm:Channel Handle="ch0.vmd0"
+						SafetyClassification="MedA">
+						<pm:Type Code="70719"> <!-- MDC_DEV_CNTRL_CHAN 1::5183 -->
+							<pm:ConceptDescription Lang="en-US">Settings channel related to column-lifting</pm:ConceptDescription>
+						</pm:Type>
+
+                        <!-- metric0 (level4) -->
+						<!-- here: lift-position -->
+						<pm:Metric Handle="m0.ch0.vmd0"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133434"> <!-- MDC_ATTR_METRIC_CALIB 2::2362 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific lift-position</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="263440"> <!-- MDC_DIM_X_M 4::1296 -->
+								<pm:ConceptDescription Lang="en-US">mm</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="600" Lower="0"
+								StepWidth="1" />
+						</pm:Metric>
+
+						<!-- metric1 (level4) -->
+						<!-- here: lift-speed -->
+						<pm:Metric Handle="m1.ch0.vmd0"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133440"> <!-- MDC_ATTR_METRIC_STAT 2::2368 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific lift-speed</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="264978"> <!-- MDC_DIM_X_M_PER_SEC 4::2834 -->
+								<pm:ConceptDescription Lang="en-US">mm per second</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="13.2" Lower="0"
+								StepWidth="0.1" />
+						</pm:Metric>
+					</pm:Channel>
+
+                    <!-- Channel1 (level3) -->  
+					<!-- here: tilting right/left (Kantung)--> 
+					<pm:Channel Handle="ch1.vmd0"
+						SafetyClassification="MedA">
+						<pm:Type Code="70659"> <!-- MDC_DEV_GENERAL_CHAN 1::5123 -->
+							<pm:ConceptDescription Lang="en-US">Settings channel related to column-tilting</pm:ConceptDescription>
+						</pm:Type>
+
+                        <!-- metric0 (level4) -->
+						<!-- here: tilt-position -->
+						<pm:Metric Handle="m0.ch1.vmd0"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133500"> <!-- MDC_ATTR_SETTINGS_SYST 2::2428 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific tilt-position</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="262880"> <!-- MDC_DIM_ANG_DEG 4::736 -->
+								<pm:ConceptDescription Lang="en-US">degree</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="25" Lower="-25"
+								StepWidth="1" />
+						</pm:Metric>
+
+						<!-- metric0 (level4) -->
+						<!-- here: tilt-speed -->
+						<pm:Metric Handle="m1.ch1.vmd0"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133567"> <!-- MDC_ATTR_DESC_PROCEDURE 2::2495 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific tilt-speed</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="268832"> <!-- MDC_DIM_X_RAD_PER_SEC 4::6688 -->
+								<pm:ConceptDescription Lang="en-US">radiant per second</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="0.0419" Lower="0"
+								StepWidth="0.0001" />
+						</pm:Metric>
+					</pm:Channel>
+
+					<!-- Channel2 (level3) -->  
+					<!-- here: slanting (Trendelenburg/reverse Trendelenburg) (Neigung)--> 
+					<pm:Channel Handle="ch2.vmd0"
+						SafetyClassification="MedA">
+						<pm:Type Code="69635"> <!-- MDC_DEV_CHAN 1::4099 -->
+							<pm:ConceptDescription Lang="en-US">Settings channel related to column-slanting</pm:ConceptDescription>
+						</pm:Type>
+
+                        <!-- metric0 (level4) -->
+						<!-- here: slant-position -->
+						<pm:Metric Handle="m0.ch2.vmd0"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133435"> <!-- MDC_ATTR_METRIC_CLASS 2::2363 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific slant-position</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="262880"> <!-- MDC_DIM_ANG_DEG 4::736 -->
+								<pm:ConceptDescription Lang="en-US">degree</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="40" Lower="-40"
+								StepWidth="1" />
+						</pm:Metric>
+
+                        <!-- metric1 (level4) -->
+						<!-- here: slant-speed -->
+						<pm:Metric Handle="m1.ch2.vmd0"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133446"> <!-- MDC_ATTR_MODE_OP 2::2374 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific slant-speed</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="268832"> <!-- MDC_DIM_X_RAD_PER_SEC 4::6688 -->
+								<pm:ConceptDescription Lang="en-US">radiant per second</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="0.0349" Lower="0"
+								StepWidth="0.0001" />
+						</pm:Metric>
+					</pm:Channel>
+
+					<!-- Channel3 (level3) -->  
+					<!-- here: configuration --> 
+					<pm:Channel Handle="ch3.vmd0"
+						SafetyClassification="MedA">
+						<pm:Type Code="69743"> <!-- MDC_DEV_CALC_CHAN 1::4207 -->
+							<pm:ConceptDescription Lang="en-US">Settings channel related to column-configuration</pm:ConceptDescription>
+						</pm:Type>
+
+                        <!-- metric0 (level4) -->
+						<!-- here: column type -->
+						<pm:Metric Handle="m0.ch3.vmd0"
+							SafetyClassification="MedA" xsi:type="pm:StringMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr">
+							<pm:Type Code="133436"> <!-- MDC_ATTR_METRIC_INFO_LABEL 2::2364 -->
+								<pm:ConceptDescription Lang="en-US">string metric to configure the column type</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="262656"> <!-- MDC_DIM_DIMLESS 4::512 -->
+								<pm:ConceptDescription Lang="en-US">no unit</pm:ConceptDescription>
+							</pm:Unit>
+						</pm:Metric>
+
+						<!-- metric1 (level4) -->
+						<!-- here: transporter -->
+						<pm:Metric Handle="m1.ch3.vmd0"
+							SafetyClassification="MedA"
+							xsi:type="pm:EnumStringMetricDescriptor" MetricCategory="Set"
+							MetricAvailability="Intr">
+							<pm:Type Code="133437"> <!-- MDC_ATTR_METRIC_INFO_LABEL_STR 2::2365 -->
+								<pm:ConceptDescription Lang="en-US">string metric to install/deinstall a transporter</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="262656"> <!-- MDC_DIM_DIMLESS  4::512 -->
+								<pm:ConceptDescription Lang="en-US">no unit</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:AllowedValue>
+								<pm:Value>ON</pm:Value>
+								<pm:Type Code="192834">
+									<pm:ConceptDescription Lang="en-US">ON</pm:ConceptDescription>
+								</pm:Type>
+							</pm:AllowedValue>
+							<pm:AllowedValue>
+								<pm:Value>OFF</pm:Value>
+								<pm:Type Code="192835">
+									<pm:ConceptDescription Lang="en-US">OFF</pm:ConceptDescription>
+								</pm:Type>
+							</pm:AllowedValue>
+						</pm:Metric>
+
+						<!-- metric2 (level4) -->
+						<!-- here: fixation -->
+						<pm:Metric Handle="m2.ch3.vmd0"
+							SafetyClassification="MedA"
+							xsi:type="pm:EnumStringMetricDescriptor" MetricCategory="Set"
+							MetricAvailability="Intr">
+							<pm:Type Code="133504"> <!-- MDC_ATTR_STAT_LOCK 2::2432 -->
+								<pm:ConceptDescription Lang="en-US">string metric to lock/unlock the column</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="262656"> <!-- MDC_DIM_DIMLESS 4::512 -->
+								<pm:ConceptDescription Lang="en-US">no unit</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:AllowedValue>
+								<pm:Value>ON</pm:Value>
+								<pm:Type Code="192834">
+									<pm:ConceptDescription Lang="en-US">ON</pm:ConceptDescription>
+								</pm:Type>
+							</pm:AllowedValue>
+							<pm:AllowedValue>
+								<pm:Value>OFF</pm:Value>
+								<pm:Type Code="192835">
+									<pm:ConceptDescription Lang="en-US">OFF</pm:ConceptDescription>
+								</pm:Type>
+							</pm:AllowedValue>
+						</pm:Metric>
+
+						<!-- metric3 (level4) -->
+						<!-- here: rotation (manually) -->
+						<pm:Metric Handle="m3.ch3.vmd0"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Msrmt" MetricAvailability="Cont" Resolution='0.1'>
+							<pm:Type Code="133431"> <!-- MDC_ATTR_LOCALIZN 2::2359 -->
+								<pm:ConceptDescription Lang="en-US">dynamic numeric metric to get the orientation of the OP table with regard to other devices</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="262880"> <!-- MDC_DIM_ANG_DEG 4::736 -->
+								<pm:ConceptDescription Lang="en-US">degree</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="45" Lower="-45"
+								StepWidth="1" />
+						</pm:Metric>
+					</pm:Channel>
+				</pm:Vmd>
+
+
+				<!-- virtual medical device (level2) -->
+				<!-- here: surface -->
+				<pm:Vmd Handle="vmd1" SafetyClassification="MedA">
+					<pm:Type Code="70662"> <!-- MDC_DEV_AUX_VMD 1::5126 -->
+						<pm:ConceptDescription Lang="en-US">Surface of the Operating Table</pm:ConceptDescription>
+					</pm:Type>
+
+                    <!-- Alert System could be specified at this point (level3) -->   
+
+
+                    <!-- Service and Control Object (level3) -->                 
+					<pm:Sco Handle="sco.vmd1">
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m0.ch0.vmd1_sco"
+							OperationTarget="m0.ch0.vmd1" SafetyClassification="MedC"
+							MaxTimeToFinish="PT5S" InvocationEffectiveTimeout="PT1S" Retriggerable="true" AccessLevel="Usr">
+							<pm:Type Code="134149"> <!-- MDC_ACT_GET_CTXT_HELP 2::3077 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific slant-position</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m1.ch0.vmd1_sco"
+							OperationTarget="m1.ch0.vmd1" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="Usr">
+							<pm:Type Code="134150"> <!-- MDC_ACT_PRE_ADMIT_PT 2::3078 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific slant-speed</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m0.ch1.vmd1_sco"
+							OperationTarget="m0.ch1.vmd1" SafetyClassification="MedC"
+							MaxTimeToFinish="PT5S" InvocationEffectiveTimeout="PT1S" Retriggerable="true" AccessLevel="Usr">
+							<pm:Type Code="134151"> <!-- MDC_ACT_REFR_CTXT 2::3079 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific longitudinal displac. position</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m1.ch1.vmd1_sco"
+							OperationTarget="m1.ch1.vmd1" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="Usr">
+							<pm:Type Code="134152"> <!-- MDC_ACT_REFR_EPI_DATA 2::3080 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific longitudinal displac. speed</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m0.ch2.vmd1_sco"
+							OperationTarget="m0.ch2.vmd1" SafetyClassification="MedC"
+							MaxTimeToFinish="PT5S" InvocationEffectiveTimeout="PT1S" Retriggerable="true" AccessLevel="Usr">
+							<pm:Type Code="134157"> <!-- MDC_SACT_SEG_GET 2::3085 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific transverse displac. position</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetValueOperationDescriptor"
+							Handle="m1.ch2.vmd1_sco"
+							OperationTarget="m1.ch2.vmd1" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="Usr">
+							<pm:Type Code="134158"> <!-- MDC_ACT_SEG_GET_INFO 2::3086 -->
+								<pm:ConceptDescription Lang="en-US">operation to set a specific transverse displac. speed</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetStringOperationDescriptor"
+							Handle="m0.ch3.vmd1_sco"
+							OperationTarget="m0.ch3.vmd1" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="CSUsr">
+							<pm:Type Code="134161"> <!-- MDC_ACT_PDMO_TXN 2::3089 -->
+								<pm:ConceptDescription Lang="en-US">operation to configure the surface type</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetStringOperationDescriptor"
+							Handle="m1.ch3.vmd1_sco"
+							OperationTarget="m1.ch3.vmd1" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="CSUsr">
+							<pm:Type Code="134162"> <!-- MDC_ACT_PDMO_PROMPT 2::3090 -->
+								<pm:ConceptDescription Lang="en-US">operation to install/deinstall hinge modules</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+
+						<pm:Operation
+							xsi:type="pm:SetStringOperationDescriptor"
+							Handle="m2.ch3.vmd1_sco"
+							OperationTarget="m2.ch3.vmd1" SafetyClassification="MedC"
+							MaxTimeToFinish="PT1S" AccessLevel="CSUsr">
+							<pm:Type Code="134163"> <!-- MDC_PDMO_MSG_BOX 2::3091 -->
+								<pm:ConceptDescription Lang="en-US">operation to install/deinstall the surface on a column</pm:ConceptDescription>
+							</pm:Type>
+						</pm:Operation>
+					</pm:Sco>
+
+                    <!-- Channel0 (level3) --> 
+					<!-- here: slanting (Neigung) -->                                       
+					<pm:Channel Handle="ch0.vmd1"
+						SafetyClassification="MedA">
+						<pm:Type Code="70663"> <!-- MDC_DEV_AUX_CHAN 1::5127 -->
+							<pm:ConceptDescription Lang="en-US">Settings channel related to surface-slanting</pm:ConceptDescription>
+						</pm:Type>
+
+                        <!-- metric0 (level4) -->
+						<!-- here: slant-position -->
+						<pm:Metric Handle="m0.ch0.vmd1"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133439"> <!-- MDC_ATTR_METRIC_SPECN 2::2367 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific slant-position</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="262880"> <!-- MDC_DIM_ANG_DEG 4::736 -->
+								<pm:ConceptDescription Lang="en-US">degree</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="15" Lower="-15"
+								StepWidth="1" />
+						</pm:Metric>
+
+						<!-- metric1 (level4) -->
+						<!-- here: slant-speed -->
+						<pm:Metric Handle="m1.ch0.vmd1"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133458"> <!-- MDC_ATTR_OP_SPEC 2::2386 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific slant-speed</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="268832"> <!-- MDC_DIM_X_RAD_PER_SEC 4::6688 -->
+								<pm:ConceptDescription Lang="en-US">radiant per second</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="0.0349" Lower="0"
+								StepWidth="0.0001" />
+						</pm:Metric>
+					</pm:Channel>
+
+					<!-- Channel1 (level3) --> 
+					<!-- here: longitudinal displacement (Längsverschiebung) -->                                       
+					<pm:Channel Handle="ch1.vmd1"
+						SafetyClassification="MedA">
+						<pm:Type Code="70763"> <!-- MDC_DEV_NU_GENERAL_CHAN 1::5227 -->
+							<pm:ConceptDescription Lang="en-US">Settings channel related to surface-longitudinal-displacement</pm:ConceptDescription>
+						</pm:Type>
+
+                        <!-- metric0 (level4) -->
+						<!-- here: long. displac. position -->
+						<pm:Metric Handle="m0.ch1.vmd1"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133459"> <!-- MDC_ATTR_OP_STAT 2::2387 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific longitudinal displac. position</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="263440"> <!-- MDC_DIM_X_M 4::1296 -->
+								<pm:ConceptDescription Lang="en-US">mm</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="1000" Lower="0"
+								StepWidth="1" />
+						</pm:Metric>
+
+						<!-- metric1 (level4) -->
+						<!-- here: long. displac. speed -->
+						<pm:Metric Handle="m1.ch1.vmd1"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133507"> <!-- MDC_ATTR_SYS_CAPAB 2::2435 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific longitudinal displac. speed</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="264978"> <!-- MDC_DIM_X_M_PER_SEC 4::2834 -->
+								<pm:ConceptDescription Lang="en-US">mm per second</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="150" Lower="0"
+								StepWidth="1" />
+						</pm:Metric>
+					</pm:Channel>
+
+					<!-- Channel2 (level3) --> 
+					<!-- here: transverse displacement (Querverschiebung) -->                                       
+					<pm:Channel Handle="ch2.vmd1"
+						SafetyClassification="MedA">
+						<pm:Type Code="70743"> <!-- MDC_DEV_SYS_VS_CHAN 1::5207 -->
+							<pm:ConceptDescription Lang="en-US">Settings channel related to surface-transverse-displacement</pm:ConceptDescription>
+						</pm:Type>
+
+                        <!-- metric0 (level4) -->
+						<!-- here: transv. displac. position -->
+						<pm:Metric Handle="m0.ch2.vmd1"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133569"> <!-- MDC_ATTR_DISCRIM_CONSTRUCT 2::2497 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific transverse displac. position</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="263440"> <!-- MDC_DIM_X_M 4::1296-->
+								<pm:ConceptDescription Lang="en-US">mm</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="100" Lower="-100"
+								StepWidth="1" />
+						</pm:Metric>
+
+						<!-- metric1 (level4) -->
+						<!-- here: transv. displac. speed -->
+						<pm:Metric Handle="m1.ch2.vmd1"
+							SafetyClassification="MedA" xsi:type="pm:NumericMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr" Resolution='0.1'>
+							<pm:Type Code="133672"> <!-- MDC_ATTR_LOCALE 2::2600 -->
+								<pm:ConceptDescription Lang="en-US">numeric metric to set a specific transverse displac. speed</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="264978"> <!-- MDC_DIM_X_M_PER_SEC 4::2834 -->
+								<pm:ConceptDescription Lang="en-US">mm per second</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:TechnicalRange Upper="40" Lower="0"
+								StepWidth="1" />
+						</pm:Metric>
+					</pm:Channel>
+
+					<!-- Channel3 (level3) --> 
+					<!-- here: configuration -->                                       
+					<pm:Channel Handle="ch3.vmd1"
+						SafetyClassification="MedA">
+						<pm:Type Code="70747"> <!-- MDC_DEV_SYS_VS_CONFIG_CHAN 1::5211 -->
+							<pm:ConceptDescription Lang="en-US">Settings channel related to surface-configuration</pm:ConceptDescription>
+						</pm:Type>
+
+                        <!-- metric0 (level4) -->
+						<!-- here: surface type -->
+						<pm:Metric Handle="m0.ch3.vmd1"
+							SafetyClassification="MedA" xsi:type="pm:StringMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr">
+							<pm:Type Code="133639"> <!-- MDC_ATTR_SET_STRING_SPEC 2::2567 -->
+								<pm:ConceptDescription Lang="en-US">string metric to configure the surface type</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="262656"> <!-- MDC_DIM_DIMLESS  4::512 -->
+								<pm:ConceptDescription Lang="en-US">no unit</pm:ConceptDescription>
+							</pm:Unit>
+						</pm:Metric>
+
+						<!-- metric1 (level4) -->
+						<!-- here: hinge module -->
+						<pm:Metric Handle="m1.ch3.vmd1"
+							SafetyClassification="MedA" xsi:type="pm:StringMetricDescriptor"
+							MetricCategory="Set" MetricAvailability="Intr">
+							<pm:Type Code="133460"> <!-- MDC_ATTR_OP_TEXT 2::2388 -->
+								<pm:ConceptDescription Lang="en-US">string metric to install/deinstall hinge modules</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="262656"> <!-- MDC_DIM_DIMLESS 4::512 -->
+								<pm:ConceptDescription Lang="en-US">no unit</pm:ConceptDescription>
+							</pm:Unit>
+						</pm:Metric>
+
+						<!-- metric2 (level4) -->
+						<!-- here: mounting -->
+						<pm:Metric Handle="m2.ch3.vmd1"
+							SafetyClassification="MedA"
+							xsi:type="pm:EnumStringMetricDescriptor" MetricCategory="Set"
+							MetricAvailability="Intr">
+							<pm:Type Code="133461"> <!-- MDC_ATTR_POWER_STAT 2::2389 -->
+								<pm:ConceptDescription Lang="en-US">string metric to install/deinstall the surface on a column</pm:ConceptDescription>
+							</pm:Type>
+							<pm:Unit Code="262656"> <!-- MDC_DIM_DIMLESS 4::512 -->
+								<pm:ConceptDescription Lang="en-US">no unit</pm:ConceptDescription>
+							</pm:Unit>
+							<pm:AllowedValue>
+								<pm:Value>ON</pm:Value>
+								<pm:Type Code="192834">
+									<pm:ConceptDescription Lang="en-US">ON</pm:ConceptDescription>
+								</pm:Type>
+							</pm:AllowedValue>
+							<pm:AllowedValue>
+								<pm:Value>OFF</pm:Value>
+								<pm:Type Code="192835">
+									<pm:ConceptDescription Lang="en-US">OFF</pm:ConceptDescription>
+								</pm:Type>
+							</pm:AllowedValue>
+						</pm:Metric>
+					</pm:Channel>
+				</pm:Vmd>
+            </pm:Mds>
+		</pm:MdDescription>
+	</msg:Mdib>
+</msg:GetMdibResponse>

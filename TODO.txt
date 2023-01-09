@@ -1,0 +1,18 @@
+(A) Feature Extraction and Statistics (AfterImage, netStat)
+    - extract features based on HTTP headers - web-based IDS
+    - extract features related to the payload (XML file)
+    - final feature selection with PCA or heatmap?
+    - currently packet flows (streams) between two devices get measured based on srcIP and dstIP  
+        -> in case of sdc data it might be better to measure streams based on Session ID
+(B) Data Generator 
+    - automate generation of different anomalies to evaluate the model (i.e. like ID2T)
+    - add noise to generate more realistic datasets 
+    - data augmentation 
+(C) online packet capturing (Kitsune)
+    - improve parsing speed with cython, numba jit or multiprocessing
+(D) Framework to test it on IoT devices (with Raspberry Pi or Nvidia Jetson Nano)
+    - generate dataset with man-in-the-middle attack (tool to do so: ettercap)
+(E) Evaluation 
+    - visualize clustering to manually optimize the feature map 
+    - Explainable AI to visualize the reason for raising alarms 
+        - e.g. use logged packets that cause an alarm to visualize the attacker on network graph in neo4j browser
